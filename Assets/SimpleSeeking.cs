@@ -7,17 +7,17 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 	public IVehicle target;
 	
 	//Implement all getters and setters.
-	public float maxSpeed {get; set;}
-	public float mass {get; set;}
-	public float radius {get; set;}
 	public float maxForce {get; set;}
+	public float maxSpeed{get; set;}
+	public float mass{get; set;}
+	public float radius{get; set;}
 	
 	public Vector3 position{get; set;}
 	public Vector3 velocity{get; set;}
 	
 	//Use this for initialization
 	void Start() {
-		maxSpeed = 5.5f;
+		maxSpeed = 7.5f;
 		mass = 1.0f;
 		
 		//Get specific cube object

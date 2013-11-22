@@ -3,14 +3,13 @@ using System.Collections;
 
 public class BackForth : MonoBehaviour, IVehicle{
 	
-	public float maxSpeed {get; set;}
-	public float mass {get; set;}
-	public float radius {get; set;}
-	
 	public float maxForce {get; set;}
+	public float maxSpeed{get; set;}
+	public float mass{get; set;}
+	public float radius{get; set;}
+	
 	public Vector3 position{get; set;}
 	public Vector3 velocity{get; set;}
-	
 	Vector3 pointB;
 	
 	public float smooth = .1f;

@@ -9,7 +9,7 @@ public interface IVehicle {
 	float mass{get; set;}
 	float radius{get; set;}
 	
-	Vector3 velocity{get; set;}
 	Vector3 position{get; set;}
+	Vector3 velocity{get; set;}
 	
 }
