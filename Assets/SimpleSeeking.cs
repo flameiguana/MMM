@@ -15,7 +15,7 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 	public Vector3 position{get; set;}
 	public Vector3 velocity{get; set;}
 	
-	//Use this for initialization
+	
 	void Start() {
 		maxSpeed = 7.5f;
 		mass = 1.0f;
@@ -26,7 +26,7 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 		target = other.GetComponent<BackForth>();
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
 		//Access steering forces library and adjust it.
 		Vector3 steeringForce = SteeringForces.seek(this, target.position);

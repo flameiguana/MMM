@@ -20,18 +20,18 @@ public class CameraControls : MonoBehaviour {
 	void Update() {
 		// handle zooming
 		float vDir = 0;
-		if (Input.GetKey("[+]")) vDir = 1;
-		if (Input.GetKey("[-]")) vDir = -1;
+		if (Input.GetKey("a")) vDir = 1;
+		if (Input.GetKey("b")) vDir = -1;
 		Camera.main.transform.position += zoomVec * moveSpeed * vDir * Time.deltaTime;
 
 		// check for change in camera control
 		if (Camera.main != null)
 		{
-			if (Input.GetKeyDown("[7]")) {
+			if (Input.GetKeyDown("7")) {
 				BirdsEyeView();
-			} else if (Input.GetKeyDown("[8]")) {
+			} else if (Input.GetKeyDown("8")) {
 				SideView();
-			} else if (Input.GetKeyDown("[9]")) {
+			} else if (Input.GetKeyDown("9")) {
 				DiagonalView();
 			} else {
 				// do nothing

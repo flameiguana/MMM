@@ -1,8 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SimpleSeeking.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CameraControls.cs">
     <Files>
-      <File FileName="Assets\SimpleSeeking.cs" Line="4" Column="27" />
+      <File FileName="Assets\Steer\Flock.cs" Line="41" Column="4" />
+      <File FileName="Assets\SimpleSeeking.cs" Line="17" Column="2" />
+      <File FileName="Assets\Steer\SteeringForces.cs" Line="10" Column="86" />
+      <File FileName="Assets\Steer\IVehicle.cs" Line="11" Column="2" />
+      <File FileName="Assets\BackForth.cs" Line="13" Column="17" />
+      <File FileName="Assets\CameraControls.cs" Line="23" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
