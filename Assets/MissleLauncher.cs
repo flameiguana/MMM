@@ -5,7 +5,7 @@ public class MissleLauncher : MonoBehaviour {
 	GameObject SeekMPrefab;
 
 	void Start () {
-		seekprefab = GameObject.Find("SeekRocket");
+		SeekMPrefab = GameObject.Find("SeekRocket");
 	}
 	
 	// Update is called once per frame
