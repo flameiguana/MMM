@@ -38,7 +38,7 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 		position = transform.position; //update for use in steering functions
 		
 		//Update rotations
-		transform.forward = velocity.normalized;
+		transform.up = velocity.normalized;
 	}
 }
 
