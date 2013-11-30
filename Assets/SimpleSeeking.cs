@@ -26,7 +26,11 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 		target = other.GetComponent<BackForth>();
 	}
 	
-
+	
+	void OnCollisionEnter(Collision other){
+		Debug.Log ("Collided");	
+	}
+	
 	void Update () {
 		//Access steering forces library and adjust it.
 		Vector3 steeringForce = SteeringForces.seek(this, target.position);
