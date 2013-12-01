@@ -5,6 +5,7 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 	
 	
 	public IVehicle target;
+	public GameObject effect;
 	
 	//Implement all getters and setters.
 	public float maxForce {get; set;}
@@ -28,6 +29,8 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 	
 	
 	void OnCollisionEnter(Collision other){
+		Destroy(gameObject);
+		Instantiate(effect, position, Quaternion.identity);
 		Debug.Log ("Collided");	
 	}
 	

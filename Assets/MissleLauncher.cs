@@ -2,10 +2,11 @@
 using System.Collections;
 
 public class MissleLauncher : MonoBehaviour {
-	GameObject SeekMPrefab;
+	public GameObject SeekMPrefab;
+
 
 	void Start () {
-		SeekMPrefab = GameObject.Find("SeekRocket");
+		//SeekMPrefab = GameObject.Find("SeekRocket"); want a general prefab
 	}
 	
 	// Update is called once per frame
