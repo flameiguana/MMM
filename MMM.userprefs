@@ -1,18 +1,9 @@
 ﻿<Properties>
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Steer\SteeringForces.cs">
     <Files>
-      <File FileName="Assets\Steer\SteeringForces.cs" Line="1" Column="1" />
-=======
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\BackForth.cs">
-    <Files>
-      <File FileName="Assets\SimpleSeeking.cs" Line="46" Column="33" />
-      <File FileName="Assets\Steer\SteeringForces.cs" Line="14" Column="2" />
-      <File FileName="Assets\BackForth.cs" Line="1" Column="1" />
-      <File FileName="Assets\MissleLauncher.cs" Line="20" Column="53" />
->>>>>>> 73f5137955aa142b95733cf7bbe3c6c7b0eeb5bd
+      <File FileName="Assets\Steer\SteeringForces.cs" Line="16" Column="28" />
+      <File FileName="Assets\Steer\SteeringForces.cs" Line="16" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
