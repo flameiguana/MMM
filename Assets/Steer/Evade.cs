@@ -39,7 +39,7 @@ public class Evade : MonoBehaviour, IVehicle {
 		Destroy(gameObject);
 
 
-		//Instantiate(effect, position, Quaternion.identity);
+		Instantiate(effect, position, Quaternion.identity);
 
 		Debug.Log ("Collided" + other.gameObject.tag);
 		}
