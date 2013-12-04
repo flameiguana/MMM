@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class CircleFlight : MonoBehaviour, IVehicle{
-	
+  	public GameObject vehicleGameObject{get; set;}
 	public float maxForce {get; set;}
 	public float maxSpeed{get; set;}
 	public float mass{get; set;}

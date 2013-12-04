@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Evade : MonoBehaviour, IVehicle {
 	
-	
+  public GameObject vehicleGameObject{get; set;}	
 	public IVehicle target;
 	public IVehicle movearound;
 
