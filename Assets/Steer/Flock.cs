@@ -32,7 +32,6 @@ public class Flock : MonoBehaviour, IVehicle {
 
 
 	void Start () {
-		GameObject other = GameObject.Find("Cube");
 		this.rigidbody.freezeRotation = true;
 	}
 

@@ -3,6 +3,10 @@ using System.Collections;
 
 public class MissleLauncher : MonoBehaviour {
 	public GameObject SeekMPrefab;
+	public GameObject Target;
+
+	public int numMissiles = 8;
+	public float launchRadius = 5;
 
 
 	void Start () {
@@ -12,13 +16,17 @@ public class MissleLauncher : MonoBehaviour {
 	// Update is called once per frame
 
 	void Update () {
-		Vector3 newPosition = transform.localPosition;
-
 		if(Input.GetKeyDown(KeyCode.D)){
-			newPosition.x = transform.localPosition.x + 5.0f;
-			Instantiate(SeekMPrefab, newPosition, transform.rotation);
-			newPosition.x = transform.localPosition.x - 5.0f;
-			Instantiate(SeekMPrefab, newPosition, transform.rotation);
+			for(int i = 0; i < numMissiles; i++){
+				float angle = (float)(i)/(float)(numMissiles)*Mathf.PI*2;
+				Vector3 newPosition = transform.localPosition;
+				newPosition.x = transform.localPosition.x + Mathf.Cos(angle)*launchRadius;
+				newPosition.y = transform.localPosition.y + Mathf.Sin(angle)*launchRadius;
+				GameObject temp = (GameObject)Instantiate(SeekMPrefab, newPosition, transform.rotation);
+
+				//this script needs to be hand changed depending on the target, since we're not using rigidbodies
+				temp.GetComponent<Flock>().target = Target.GetComponent<BackForth>();
+			}
 		}
 	}
 }

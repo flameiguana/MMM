@@ -2,7 +2,7 @@
 using System.Collections;
 
 //Put anything you find useful here
-public interface IVehicle {
+public interface IVehicle{
 
 	GameObject vehicleGameObject{get; set;}
 
