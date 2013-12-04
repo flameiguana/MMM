@@ -5,7 +5,6 @@ using System.Collections;
 public class Flock : MonoBehaviour, IVehicle {
 	
 	public IVehicle target;
-	public IVehicle source;
 	public GameObject effect;
 	
 	private static readonly float pursueRadius = 30;
@@ -18,6 +17,7 @@ public class Flock : MonoBehaviour, IVehicle {
 	private Vector3 targetPos;
 	private float initialDistFromTarget;
 	private bool reachedTarget;
+	private bool changedTargets;
 
 
  	public GameObject vehicleGameObject{get; set;}  
@@ -35,6 +35,16 @@ public class Flock : MonoBehaviour, IVehicle {
 		this.rigidbody.freezeRotation = true;
 	}
 
+	void OnTriggerEnter(Collider other){
+		if(changedTargets) return;
+		if(other.gameObject.tag == "Decoy"){
+			//Debug.Log ("Hi");
+			DecoyMissile decoy = other.gameObject.GetComponent<DecoyMissile>();
+			decoy.follow_count += 1;
+			target = decoy;
+		}
+	}
+
 	void OnCollisionEnter(Collision other){
 		Destroy(gameObject);
 		Instantiate(effect, this.rigidbody.position, Quaternion.identity);
@@ -42,6 +52,8 @@ public class Flock : MonoBehaviour, IVehicle {
 
 	// Update is called once per frame
 	void Update () {
+		if(target.vehicleGameObject == null)
+			return;
 		//set the targetPos if it hasn't been set yet
 		if(targetPos == Vector3.zero){
 			targetPos = target.position;
@@ -79,11 +91,6 @@ public class Flock : MonoBehaviour, IVehicle {
 				vel -= evadeVec*evadePower*relativePower;
 			}
 		}
-		//move away from source as well
-		/*Vector3 evadeSourceVec = source.position - this.rigidbody.position;
-		float relativeSourcePower = evadeRadius - evadeSourceVec.magnitude;
-		evadeSourceVec.Normalize();
-		vel -= evadeSourceVec*evadePower*.1f*relativeSourcePower;*/
 		
 		
 		//got toward target.
