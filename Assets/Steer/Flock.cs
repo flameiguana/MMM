@@ -9,15 +9,17 @@ public class Flock : MonoBehaviour, IVehicle {
 	
 	private static readonly float pursueRadius = 30;
 	private static readonly float evadeRadius = 10;
-	private static readonly float evadePower = .2f;
-	private static readonly float pursuePower = .4f;
+	private static readonly float evadePower = .4f;
+	private static readonly float pursuePower = .3f;
 	private static readonly float acceleration = 10;
 	private static readonly float maxPursueVelocity = 10;
+	private static readonly float timeout = 2;
 
 	private Vector3 targetPos;
 	private float initialDistFromTarget;
 	private bool reachedTarget;
 	private bool changedTargets;
+	private float startTime;
 
 
  	public GameObject vehicleGameObject{get; set;}  
@@ -33,6 +35,8 @@ public class Flock : MonoBehaviour, IVehicle {
 
 	void Start () {
 		this.rigidbody.freezeRotation = true;
+		startTime = Time.time;
+		Debug.Log("time: " + startTime);
 	}
 
 	void OnTriggerEnter(Collider other){
@@ -42,6 +46,7 @@ public class Flock : MonoBehaviour, IVehicle {
 			DecoyMissile decoy = other.gameObject.GetComponent<DecoyMissile>();
 			decoy.follow_count += 1;
 			target = decoy;
+			changedTargets = true;
 		}
 	}
 
@@ -52,7 +57,11 @@ public class Flock : MonoBehaviour, IVehicle {
 
 	// Update is called once per frame
 	void Update () {
-		if(target.vehicleGameObject == null)
+		if(Time.time - startTime > timeout){
+			Destroy(gameObject);
+			Instantiate(effect, this.rigidbody.position, Quaternion.identity);
+		}
+		if(target == null || target.vehicleGameObject == null)
 			return;
 		//set the targetPos if it hasn't been set yet
 		if(targetPos == Vector3.zero){
@@ -65,7 +74,7 @@ public class Flock : MonoBehaviour, IVehicle {
 			reachedTarget = true;
 
 		//check if its overshot it's target after getting close
-		if((targetPos - this.position).magnitude > initialDistFromTarget*.4 && reachedTarget){
+		if((targetPos - this.position).magnitude > initialDistFromTarget*.3 && reachedTarget){
 			Destroy(gameObject);
 			Instantiate(effect, this.rigidbody.position, Quaternion.identity);
 			Debug.Log("overshot");
