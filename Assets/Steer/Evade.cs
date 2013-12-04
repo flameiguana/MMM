@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Evade : MonoBehaviour, IVehicle {
 	
-  public GameObject vehicleGameObject{get; set;}	
+	public GameObject vehicleGameObject{get; set;}  
 	public IVehicle target;
 	public IVehicle movearound;
 
@@ -39,7 +39,7 @@ public class Evade : MonoBehaviour, IVehicle {
 		Destroy(gameObject);
 
 
-		Instantiate(effect, position, Quaternion.identity);
+		//Instantiate(effect, position, Quaternion.identity);
 
 		Debug.Log ("Collided" + other.gameObject.tag);
 		}

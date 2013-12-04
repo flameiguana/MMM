@@ -5,41 +5,38 @@ using System.Collections;
 public class Flock : MonoBehaviour, IVehicle {
 	
 	public IVehicle target;
+	public IVehicle source;
 	public GameObject effect;
 	
-	private static readonly float pursueRadius = 20;
+	private static readonly float pursueRadius = 30;
 	private static readonly float evadeRadius = 10;
-	private static readonly float evadePower = .3f;
-	private static readonly float acceleration = 35;
+	private static readonly float evadePower = .2f;
+	private static readonly float pursuePower = .3f;
+	private static readonly float acceleration = 45;
+	private static readonly float maxPursueVelocity = 2;
 
 	private Vector3 targetPos;
+	private float initialDistFromTarget;
+	private bool reachedTarget;
 
 
+ 	public GameObject vehicleGameObject{get; set;}  
 	//Implement all getters and setters.
-public GameObject vehicleGameObject{get; set;}
 	public float maxForce {get; set;}
 	public float maxSpeed{get; set;}
 	public float mass{get; set;}
 	public float radius{get; set;}
 
-	public Vector3 position{get; set;}
+	public Vector3 position{get{return this.rigidbody.position;} set{this.rigidbody.position = value;}}
 	public Vector3 velocity{get; set;}
 
 
-	// Use this for initialization
 	void Start () {
 		GameObject other = GameObject.Find("Cube");
-		//Obtains component BackForth from Cube, which also implements IVehicle
-		target = other.GetComponent<BackForth>();
-
 		this.rigidbody.freezeRotation = true;
-		targetPos = target.position;
-
-		//Get specific cube object
 	}
 
 	void OnCollisionEnter(Collision other){
-
 		Destroy(gameObject);
 		Instantiate(effect, this.rigidbody.position, Quaternion.identity);
 		Debug.Log ("Flocket Collided");	
@@ -47,14 +44,31 @@ public GameObject vehicleGameObject{get; set;}
 
 	// Update is called once per frame
 	void Update () {
-		
+		//set the targetPos if it hasn't been set yet
+		if(targetPos == Vector3.zero){
+			targetPos = target.position;
+			initialDistFromTarget = (targetPos - this.position).magnitude;
+			Debug.Log("position set");
+		}
+
+		//see if we can explode it when it gets too far away
+		if((targetPos - this.position).magnitude < initialDistFromTarget*.25)
+			reachedTarget = true;
+
+		//check if its overshot it's target after getting close
+		if((targetPos - this.position).magnitude > initialDistFromTarget*.4 && reachedTarget){
+			Destroy(gameObject);
+			Instantiate(effect, this.rigidbody.position, Quaternion.identity);
+			Debug.Log("overshot");
+		}
+
 		//stay near its friends
 		Vector3 vel = Vector3.zero;
 		Collider[] pursueColliders = Physics.OverlapSphere(this.rigidbody.position, pursueRadius);
 		foreach(Collider c in pursueColliders){
 			if(c.gameObject.GetComponent<Rigidbody>() != null){
 				Vector3 pursueVec = c.gameObject.rigidbody.position - this.rigidbody.position;
-				pursueVec.Normalize();
+				pursueVec = pursueVec.normalized * pursuePower;
 				vel += pursueVec;
 			}
 		}
@@ -68,22 +82,34 @@ public GameObject vehicleGameObject{get; set;}
 				vel -= evadeVec*evadePower*relativePower;
 			}
 		}
+		//move away from source as well
+		/*Vector3 evadeSourceVec = source.position - this.rigidbody.position;
+		float relativeSourcePower = evadeRadius - evadeSourceVec.magnitude;
+		evadeSourceVec.Normalize();
+		vel -= evadeSourceVec*evadePower*.1f*relativeSourcePower;*/
 		
 		
 		//got toward target.
 		Vector3 targetVec = targetPos - this.rigidbody.position;
-		targetVec.Normalize();
+		if(targetVec.magnitude > maxPursueVelocity){
+			targetVec = targetVec.normalized*maxPursueVelocity;
+		}
+		Debug.Log(targetVec.magnitude);
+		//targetVec.Normalize();
 		vel += targetVec;
 		
 		Quaternion curRotation = transform.rotation;
-		Vector3 temp = Vector3.Cross(Vector3.up, targetVec);
+		Vector3 temp = Vector3.Cross(Vector3.up, vel);
 		Quaternion targetRotation = new Quaternion(temp.x, temp.y, temp.z, 0);
-		targetRotation.w = Mathf.Sqrt(Mathf.Pow(Vector3.Magnitude(Vector3.up), 2) * Mathf.Pow(Vector3.Magnitude(targetVec), 2) + 
-		                              Vector3.Dot(Vector3.up, targetVec));
+		targetRotation.w = Mathf.Sqrt(Mathf.Pow(Vector3.Magnitude(Vector3.up), 2) * Mathf.Pow(Vector3.Magnitude(vel), 2) + 
+		                              Vector3.Dot(Vector3.up, vel));
 		
-		
-		transform.rotation = new Quaternion(0, 0, 0, 0);
-		this.rigidbody.AddRelativeForce(acceleration * vel);
-		transform.rotation = Quaternion.RotateTowards(curRotation, targetRotation, 1);
+
+		Quaternion tempQuat = Quaternion.RotateTowards(curRotation, targetRotation, 1);
+		if(!double.IsNaN(tempQuat.w)){
+			transform.rotation = new Quaternion(0, 0, 0, 0);
+			this.rigidbody.AddRelativeForce(acceleration * vel);
+			transform.rotation = tempQuat;
+		}
 	}
 }
