@@ -48,9 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\BackForth.cs" />
      <Compile Include="Assets\CameraControls.cs" />
+     <Compile Include="Assets\CircleFlight.cs" />
      <Compile Include="Assets\DecoyMissile.cs" />
      <Compile Include="Assets\MissleLauncher.cs" />
      <Compile Include="Assets\SimpleSeeking.cs" />
+     <Compile Include="Assets\Steer\Evade.cs" />
      <Compile Include="Assets\Steer\Flock.cs" />
      <Compile Include="Assets\Steer\IVehicle.cs" />
      <Compile Include="Assets\Steer\SteeringForces.cs" />

@@ -51,9 +51,11 @@ public class Flock : MonoBehaviour, IVehicle {
 		Vector3 vel = Vector3.zero;
 		Collider[] pursueColliders = Physics.OverlapSphere(this.rigidbody.position, pursueRadius);
 		foreach(Collider c in pursueColliders){
-			Vector3 pursueVec = c.gameObject.rigidbody.position - this.rigidbody.position;
-			pursueVec.Normalize();
-			vel += pursueVec;
+			if(c.gameObject.GetComponent<Rigidbody>() != null){
+				Vector3 pursueVec = c.gameObject.rigidbody.position - this.rigidbody.position;
+				pursueVec.Normalize();
+				vel += pursueVec;
+			}
 		}
 		//but not too close
 		Collider[] evadeColliders = Physics.OverlapSphere(this.rigidbody.position, evadeRadius);
@@ -72,17 +74,15 @@ public class Flock : MonoBehaviour, IVehicle {
 		targetVec.Normalize();
 		vel += targetVec;
 		
-		//Quaternion curRotation = transform.rotation;
-		//Vector3 temp = Vector3.Cross(Vector3.up, targetVec);
-	//	Quaternion targetRotation = new Quaternion(temp.x, temp.y, temp.z, 0);
-		//targetRotation.w = Mathf.Sqrt(Mathf.Pow(Vector3.Magnitude(Vector3.up), 2) * Mathf.Pow(Vector3.Magnitude(targetVec), 2) + 
-		//                              Vector3.Dot(Vector3.up, targetVec));
+		Quaternion curRotation = transform.rotation;
+		Vector3 temp = Vector3.Cross(Vector3.up, targetVec);
+		Quaternion targetRotation = new Quaternion(temp.x, temp.y, temp.z, 0);
+		targetRotation.w = Mathf.Sqrt(Mathf.Pow(Vector3.Magnitude(Vector3.up), 2) * Mathf.Pow(Vector3.Magnitude(targetVec), 2) + 
+		                              Vector3.Dot(Vector3.up, targetVec));
 		
-
-		transform.up = vel.normalized;
-
-		//transform.rotation = new Quaternion(0, 0, 0, 0);
+		
+		transform.rotation = new Quaternion(0, 0, 0, 0);
 		this.rigidbody.AddRelativeForce(acceleration * vel);
-		//transform.rotation = Quaternion.RotateTowards(curRotation, targetRotation, 1);
+		transform.rotation = Quaternion.RotateTowards(curRotation, targetRotation, 1);
 	}
 }
