@@ -1,6 +1,12 @@
-*.csproj
-*.pidb
 *.sln
 *.userprefs
-Library
-Temp
+*.csproj
+*.pidb
+*.unityproj
+.DS_Store
+/Library/FailedAssetImports.txt
+/Library/cache/
+/Library/previews/
+/Library/ScriptAssemblies
+/obj
+/Temp

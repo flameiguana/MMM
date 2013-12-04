@@ -37,12 +37,13 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.tag.Equals("Decoy")){
 			DecoyMissile decoy = other.gameObject.GetComponent<DecoyMissile>();
+			decoy.target_count += 1;
 			target = decoy;
 		}
 	}
 	
 	void Update () {
-		//Access steering forces libraury and adjust it.
+		//Access steering forces library and adjust it.
 		Vector3 steeringForce = SteeringForces.seek(this, target.position);
 		Vector3 acceleration = steeringForce/mass;
 		velocity = Vector3.ClampMagnitude(velocity + acceleration, maxSpeed);
