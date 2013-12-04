@@ -4,6 +4,8 @@ using System.Collections;
 //Put anything you find useful here
 public interface IVehicle {
 
+	GameObject vehicleGameObject{get; set;}
+
 	float maxForce {get; set;}
 	float maxSpeed{get; set;}
 	float mass{get; set;}

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class DecoyMissile : MonoBehaviour, IVehicle {
   // implement IVehicle interface
+
+	public GameObject vehicleGameObject{get; set;}
   public float maxForce { get; set; }
   public float maxSpeed { get; set; }
   public float mass { get; set; }
@@ -18,13 +20,14 @@ public class DecoyMissile : MonoBehaviour, IVehicle {
   public int MAX_FOLLOW = 3;
 	
   void Start() {
+	vehicleGameObject = gameObject;
     follow_count = 0;
     maxSpeed = SEEK_SPEED;
     mass = 1.0f;
     
     // find a target TODO: dynamic targeting
-    GameObject other = GameObject.Find("Seeker");
-    target = other.GetComponent<SimpleSeeking>();
+    GameObject other = GameObject.Find("DecoyTarget");
+    target = other.GetComponent<Obstacle>();
     // TODO: add explosion effect
   }
 	

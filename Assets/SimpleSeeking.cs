@@ -6,7 +6,9 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 	
 	public IVehicle target;
 	public GameObject effect;
-	
+
+	public GameObject vehicleGameObject{get; set;}
+
 	//Implement all getters and setters.
 	public float maxForce {get; set;}
 	public float maxSpeed{get; set;}
@@ -15,9 +17,11 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 	
 	public Vector3 position{get; set;}
 	public Vector3 velocity{get; set;}
-	
+
+	public bool changedTargets = false;
 	
 	void Start() {
+		vehicleGameObject = gameObject;
 		maxSpeed = 15.5f;
 		mass = 1.0f;
 		
@@ -26,36 +30,38 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 		//Obtains component BackForth from Cube, which also implements IVehicle
 		target = other.GetComponent<BackForth>();
 	}
-
 	
 	void OnCollisionEnter(Collision other){
 		Destroy(gameObject);
 		Instantiate(effect, position, Quaternion.identity);
-		Debug.Log ("Collided");
+		//Debug.Log ("Seek Collided");
 	}
 
-	/*
 	void OnTriggerEnter(Collider other){
-		if(other.gameObject.tag.Equals("Decoy")){
+		//Debug.Log ("Hi");
+		if(changedTargets) return;
+		if(other.gameObject.tag == "Decoy"){
 			DecoyMissile decoy = other.gameObject.GetComponent<DecoyMissile>();
-			decoy.target_count += 1;
+			decoy.follow_count += 1;
 			target = decoy;
 		}
 	}
-	*/
 	
 	void Update () {
-		//Access steering forces library and adjust it.
-		Vector3 steeringForce = SteeringForces.seek(this, target.position);
-		Vector3 acceleration = steeringForce/mass;
-		velocity = Vector3.ClampMagnitude(velocity + acceleration, maxSpeed);
-		
+		if(target.vehicleGameObject != null){
+			//Access steering forces library and adjust it.
+			Vector3 steeringForce = SteeringForces.seek(this, target.position);
+			Vector3 acceleration = steeringForce/mass;
+			velocity = Vector3.ClampMagnitude(velocity + acceleration, maxSpeed);
+		}
+
 		//make this fps independent
 		transform.position = transform.position + velocity * Time.deltaTime;
 		position = transform.position; //update for use in steering functions
 		
 		//Update rotations
 		transform.up = velocity.normalized;
+		
 	}
 }
 

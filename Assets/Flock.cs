@@ -14,6 +14,7 @@ public class Flock : MonoBehaviour, IVehicle {
 	private static readonly float evadePower = .3f;
 
 	//Implement all getters and setters.
+	public GameObject vehicleGameObject{get; set;}
 	public float maxForce {get; set;}
 	public float maxSpeed{get; set;}
 	public float mass{get; set;}
