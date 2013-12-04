@@ -5,18 +5,17 @@ using System.Collections;
 //A list of functions for calculating forces
 public class SteeringForces {
 	
-  //The simple seek
-  public static Vector3 seek(IVehicle self, Vector3 target){
-    Vector3 desiredVelocity = Vector3.Normalize(target - self.position) * self.maxSpeed;
-    //return the difference needed to reach that velocity
-    return desiredVelocity - self.velocity; 
-  }
-	
-  public static Vector3 flee(IVehicle self, Vector3 target)
-  {
-    Vector3 desired_velocity = Vector3.Normalize(target - self.position) * self.maxSpeed;
-    // return the difference needed to reach that velocity
-    return -(desired_velocity - self.velocity); 
-  }
+	//The simple seek
+	public static Vector3 seek(IVehicle self, Vector3 target){
+		Vector3 desiredVelocity = Vector3.Normalize(target - self.position) * self.maxSpeed;
+		//return the difference needed to reach that velocity
+    	return desiredVelocity - self.velocity; 
+	}
+
+	//Evasion
+	public static Vector3 flee(IVehicle self, Vector3 target){
+		Vector3 desiredVelocity = Vector3.Normalize(self.position - target) * self.maxSpeed;
+		return desiredVelocity - self.velocity;
+	}
 	
 }
