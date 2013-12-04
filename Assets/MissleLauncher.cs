@@ -10,8 +10,15 @@ public class MissleLauncher : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.D))
-			Instantiate(SeekMPrefab, transform.position, transform.rotation);
+		Vector3 newPosition = transform.localPosition;
+
+		if(Input.GetKeyDown(KeyCode.D)){
+			newPosition.x = transform.localPosition.x + 5.0f;
+			Instantiate(SeekMPrefab, newPosition, transform.rotation);
+			newPosition.x = transform.localPosition.x - 5.0f;
+			Instantiate(SeekMPrefab, newPosition, transform.rotation);
+		}
 	}
 }

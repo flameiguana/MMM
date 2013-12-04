@@ -48,6 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\BackForth.cs" />
      <Compile Include="Assets\CameraControls.cs" />
+<<<<<<< HEAD
+=======
+     <Compile Include="Assets\DecoyMissile.cs" />
+     <Compile Include="Assets\Flock.cs" />
+>>>>>>> 73f5137955aa142b95733cf7bbe3c6c7b0eeb5bd
      <Compile Include="Assets\MissleLauncher.cs" />
      <Compile Include="Assets\SimpleSeeking.cs" />
      <Compile Include="Assets\Steer\Flock.cs" />

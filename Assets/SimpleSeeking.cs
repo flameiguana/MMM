@@ -18,7 +18,7 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 	
 	
 	void Start() {
-		maxSpeed = 7.5f;
+		maxSpeed = 15.5f;
 		mass = 1.0f;
 		
 		//Get specific cube object
@@ -26,13 +26,23 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 		//Obtains component BackForth from Cube, which also implements IVehicle
 		target = other.GetComponent<BackForth>();
 	}
-	
+
 	
 	void OnCollisionEnter(Collision other){
 		Destroy(gameObject);
 		Instantiate(effect, position, Quaternion.identity);
-		Debug.Log ("Collided");	
+		Debug.Log ("Collided");
 	}
+
+	/*
+	void OnTriggerEnter(Collider other){
+		if(other.gameObject.tag.Equals("Decoy")){
+			DecoyMissile decoy = other.gameObject.GetComponent<DecoyMissile>();
+			decoy.target_count += 1;
+			target = decoy;
+		}
+	}
+	*/
 	
 	void Update () {
 		//Access steering forces library and adjust it.
@@ -48,5 +58,6 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 		transform.up = velocity.normalized;
 	}
 }
+
 
 //http://www.red3d.com/cwr/steer/gdc99/
