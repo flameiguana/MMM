@@ -34,6 +34,7 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 		Debug.Log ("Collided");
 	}
 
+	/*
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.tag.Equals("Decoy")){
 			DecoyMissile decoy = other.gameObject.GetComponent<DecoyMissile>();
@@ -41,6 +42,7 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 			target = decoy;
 		}
 	}
+	*/
 	
 	void Update () {
 		//Access steering forces library and adjust it.
