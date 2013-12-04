@@ -26,9 +26,9 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 		mass = 1.0f;
 		
 		//Get specific cube object
-		GameObject other = GameObject.Find("Cube");
+		//GameObject other = GameObject.Find("Cube");
 		//Obtains component BackForth from Cube, which also implements IVehicle
-		target = other.GetComponent<BackForth>();
+		//target = other.GetComponent<BackForth>();
 	}
 	
 	void OnCollisionEnter(Collision other){

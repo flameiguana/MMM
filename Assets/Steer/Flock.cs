@@ -11,9 +11,9 @@ public class Flock : MonoBehaviour, IVehicle {
 	private static readonly float pursueRadius = 30;
 	private static readonly float evadeRadius = 10;
 	private static readonly float evadePower = .2f;
-	private static readonly float pursuePower = .3f;
-	private static readonly float acceleration = 45;
-	private static readonly float maxPursueVelocity = 2;
+	private static readonly float pursuePower = .4f;
+	private static readonly float acceleration = 10;
+	private static readonly float maxPursueVelocity = 10;
 
 	private Vector3 targetPos;
 	private float initialDistFromTarget;
@@ -38,7 +38,6 @@ public class Flock : MonoBehaviour, IVehicle {
 	void OnCollisionEnter(Collision other){
 		Destroy(gameObject);
 		Instantiate(effect, this.rigidbody.position, Quaternion.identity);
-		Debug.Log ("Flocket Collided");	
 	}
 
 	// Update is called once per frame
@@ -47,7 +46,6 @@ public class Flock : MonoBehaviour, IVehicle {
 		if(targetPos == Vector3.zero){
 			targetPos = target.position;
 			initialDistFromTarget = (targetPos - this.position).magnitude;
-			Debug.Log("position set");
 		}
 
 		//see if we can explode it when it gets too far away
@@ -93,8 +91,7 @@ public class Flock : MonoBehaviour, IVehicle {
 		if(targetVec.magnitude > maxPursueVelocity){
 			targetVec = targetVec.normalized*maxPursueVelocity;
 		}
-		Debug.Log(targetVec.magnitude);
-		//targetVec.Normalize();
+
 		vel += targetVec;
 		
 		Quaternion curRotation = transform.rotation;
