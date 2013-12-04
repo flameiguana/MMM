@@ -48,7 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\BackForth.cs" />
      <Compile Include="Assets\CameraControls.cs" />
-     <Compile Include="Assets\Flock.cs" />
      <Compile Include="Assets\MissleLauncher.cs" />
      <Compile Include="Assets\SimpleSeeking.cs" />
      <Compile Include="Assets\Steer\Flock.cs" />

@@ -1,9 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Flock.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Steer\SteeringForces.cs">
     <Files>
-      <File FileName="Assets\SimpleSeeking.cs" Line="16" Column="2" />
-      <File FileName="Assets\Flock.cs" Line="36" Column="42" />
+      <File FileName="Assets\Steer\SteeringForces.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
