@@ -17,7 +17,7 @@ public class CircleFlight : MonoBehaviour, IVehicle{
 
 	// Use this for initialization
 	void Start () {
-
+		vehicleGameObject = this.gameObject;
 	}
 	
 	// Update is called once per frame

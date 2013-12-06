@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class MissleLauncher : MonoBehaviour {
-	public GameObject SeekMPrefab;
 	public GameObject Target;
 
 	public int numMissiles = 8;
@@ -18,7 +17,6 @@ public class MissleLauncher : MonoBehaviour {
 		seekMissile = (GameObject)Resources.Load("SeekMissile");
 		decoyMissile = (GameObject)Resources.Load("DecoyMissile");
 		evadeMissile = (GameObject)Resources.Load("Evaderz");
-		//SeekMPrefab = GameObject.Find("SeekRocket"); want a general prefab
 	}
 	
 	// Update is called once per frame
@@ -34,7 +32,7 @@ public class MissleLauncher : MonoBehaviour {
 				GameObject temp = (GameObject)Instantiate(flocket, newPosition, transform.rotation);
 
 				//this script needs to be hand changed depending on the target, since we're not using rigidbodies
-				temp.GetComponent<Flock>().target = Target.GetComponent<BackForth>();
+				temp.GetComponent<Flock>().target = Target.GetComponent<CircleFlight>();
 			}
 		}
 
@@ -47,7 +45,7 @@ public class MissleLauncher : MonoBehaviour {
 			GameObject temp = (GameObject)Instantiate(seekMissile, newPosition, transform.rotation);
 			
 			//this script needs to be hand changed depending on the target, since we're not using rigidbodies
-			temp.GetComponent<SimpleSeeking>().target = Target.GetComponent<BackForth>();
+			temp.GetComponent<SimpleSeeking>().target = Target.GetComponent<CircleFlight>();
 		}
 
 		//decoy missile
@@ -59,7 +57,7 @@ public class MissleLauncher : MonoBehaviour {
 			GameObject temp = (GameObject)Instantiate(decoyMissile, newPosition, transform.rotation);
 			
 			//this script needs to be hand changed depending on the target, since we're not using rigidbodies
-			temp.GetComponent<DecoyMissile>().target = Target.GetComponent<BackForth>();
+			temp.GetComponent<DecoyMissile>().target = Target.GetComponent<CircleFlight>();
 		}
 
 		//evade missile
@@ -71,7 +69,7 @@ public class MissleLauncher : MonoBehaviour {
 			GameObject temp = (GameObject)Instantiate(evadeMissile, newPosition, transform.rotation);
 			
 			//this script needs to be hand changed depending on the target, since we're not using rigidbodies
-			temp.GetComponent<Evade>().target = Target.GetComponent<BackForth>();
+			temp.GetComponent<Evade>().target = Target.GetComponent<CircleFlight>();
 		}
 
 	}
