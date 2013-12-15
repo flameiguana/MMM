@@ -23,7 +23,7 @@ public class Evade : MonoBehaviour, IVehicle {
 		mass = 1.0f;
 		
 
-		GameObject other = GameObject.Find("plane");
+		GameObject other = GameObject.Find("plane2");
 		GameObject other2 = GameObject.Find ("block");
 		//Obtains component BackForth from Cube, which also implements IVehicle
 
@@ -34,7 +34,7 @@ public class Evade : MonoBehaviour, IVehicle {
 	
 	void OnCollisionEnter(Collision other){
 
-		if(other.gameObject.name != "plane2"){
+		if(other.gameObject.name != "plane"){
 
 		Destroy(gameObject);
 

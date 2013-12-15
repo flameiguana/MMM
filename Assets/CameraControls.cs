@@ -3,9 +3,9 @@ using System.Collections;
 
 public class CameraControls : MonoBehaviour {
   // camera position "constants"
-  private Vector3 BIRD_VEC { get { return new Vector3(0, 20, 0); } }
-  private Vector3 DIAGONAL_VEC { get { return new Vector3(0, 20, 20); } } 
-  private Vector3 SIDE_VEC { get { return new Vector3(0, 0, 20); } }
+  private Vector3 BIRD_VEC { get { return new Vector3(0, 40, 0); } }
+  private Vector3 DIAGONAL_VEC { get { return new Vector3(0, 40, 40); } } 
+  private Vector3 SIDE_VEC { get { return new Vector3(0, 0, 40); } }
 
   // zoom vector "constants"
   private Vector3 BIRD_ZOOM { get { return new Vector3(0, 1, 0); } }
@@ -20,13 +20,13 @@ public class CameraControls : MonoBehaviour {
   private bool missile_destroyed;
   private int STATIC = 0, DYNAMIC = 1;
   private int mode;  
-  private SimpleSeeking target;
+  public DecoyMissile target;
   public GameObject missile;
 
   // Use this for initialization
   void Start() {
     target = null;
-    BirdsEyeView();
+    DiagonalView();
     missile_destroyed = false;
   }
 	
@@ -40,14 +40,13 @@ public class CameraControls : MonoBehaviour {
 
     // check for change in camera control
     if (Camera.main != null) {
-        if (Input.GetKeyDown("2")) {
-          BirdsEyeView();
-        } else if (Input.GetKeyDown("3")) {
+        if (Input.GetKeyDown("1")) {
+			if(missile != null)
+			MissileView();
+        } else if (Input.GetKeyDown("2")) {
           SideView();
-        } else if (Input.GetKeyDown("4")) {
+        } else if (Input.GetKeyDown("3")) {
           DiagonalView();
-        } else if (mode == DYNAMIC || Input.GetKeyDown("1")) {
-          MissileView();
         } else {
           // static camera, don't need to do anything
         }  
@@ -88,15 +87,8 @@ public class CameraControls : MonoBehaviour {
     float height = 0.3f;
 
     if (target == null) {
-      // find a random missile TODO: fix
-      if (missile_destroyed == true) {
-        missile_destroyed = false;
-        SideView();
-      } else {
-        GameObject obj = (GameObject)Instantiate(missile, transform.position, transform.rotation);
-        target = obj.GetComponent<SimpleSeeking>();
-        missile_destroyed = true;
-      }
+		SideView();
+		return;
     }
 	
     // set the position of the camera

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections;
 
 public class Flock : MonoBehaviour, IVehicle {
@@ -19,7 +18,7 @@ public class Flock : MonoBehaviour, IVehicle {
 	private Vector3 targetPos;
 	private float initialDistFromTarget;
 	private bool reachedTarget;
-	private bool changedTargets;
+	public bool changedTargets;
 	private float startTime;
 
 
@@ -38,17 +37,7 @@ public class Flock : MonoBehaviour, IVehicle {
 		this.rigidbody.freezeRotation = true;
 		startTime = Time.time;
 	}
-
-	void OnTriggerEnter(Collider other){
-		if(changedTargets) return;
-		if(other.gameObject.tag == "Decoy"){
-			DecoyMissile decoy = other.gameObject.GetComponent<DecoyMissile>();
-			decoy.follow_count += 1;
-			target = decoy;
-			changedTargets = true;
-		}
-	}
-
+	
 	void OnCollisionEnter(Collision other){
 		Destroy(gameObject);
 		Instantiate(effect, this.rigidbody.position, Quaternion.identity);

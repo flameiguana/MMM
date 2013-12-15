@@ -28,7 +28,7 @@ public class MissleLauncher : MonoBehaviour {
 				float angle = (float)(i)/(float)(numMissiles)*Mathf.PI*2;
 				Vector3 newPosition = transform.localPosition;
 				newPosition.x = transform.localPosition.x + Mathf.Cos(angle)*launchRadius - 1 + 2*Random.value;
-				newPosition.y = transform.localPosition.y + Mathf.Sin(angle)*launchRadius - 1 + 2*Random.value;;
+				newPosition.y = transform.localPosition.y + Mathf.Sin(angle)*launchRadius - 1 + 2*Random.value;
 				GameObject temp = (GameObject)Instantiate(flocket, newPosition, transform.rotation);
 
 				//this script needs to be hand changed depending on the target, since we're not using rigidbodies
@@ -49,7 +49,7 @@ public class MissleLauncher : MonoBehaviour {
 		}
 
 		//decoy missile
-		if(Input.GetKeyDown(KeyCode.D)){
+		if(Input.GetKeyDown(KeyCode.Z)){
 			float angle = (float)(Random.value)/(float)(numMissiles)*Mathf.PI*2;
 			Vector3 newPosition = transform.localPosition;
 			newPosition.x = transform.localPosition.x + Mathf.Cos(angle)*launchRadius;

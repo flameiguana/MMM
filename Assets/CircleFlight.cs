@@ -18,13 +18,12 @@ public class CircleFlight : MonoBehaviour, IVehicle{
 	// Use this for initialization
 	void Start () {
 		vehicleGameObject = this.gameObject;
+		position = transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-
-	transform.RotateAround (Vector3.zero, Vector3.up, 20 * Time.deltaTime);
-	position = transform.position;
+		transform.RotateAround (Vector3.zero, Vector3.up, 20 * Time.deltaTime);
+		position = transform.position;
 	}
 }

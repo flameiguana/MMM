@@ -24,7 +24,14 @@ public class BackForth : MonoBehaviour, IVehicle{
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = Vector3.Lerp(transform.position, pointB, smooth * Time.deltaTime);
-		position = transform.position;
+		if (Input.GetKeyDown(KeyCode.M)) {
+			if(transform.position.z == 1000)
+				transform.position = Vector3.zero;
+			else
+				transform.position = new Vector3(0,0,1000);
+		}
+		//transform.position = Vector3.Lerp(transform.position, pointB, smooth * Time.deltaTime);
+		//position = transform.position;
+		transform.Rotate(new Vector3(0, 0.1f, 0));
 	}
 }

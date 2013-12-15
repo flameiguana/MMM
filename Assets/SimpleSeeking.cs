@@ -24,29 +24,14 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 		vehicleGameObject = gameObject;
 		maxSpeed = 15.5f;
 		mass = 1.0f;
-		
-		//Get specific cube object
-		//GameObject other = GameObject.Find("Cube");
-		//Obtains component BackForth from Cube, which also implements IVehicle
-		//target = other.GetComponent<BackForth>();
 	}
 	
 	void OnCollisionEnter(Collision other){
 		Destroy(gameObject);
 		Instantiate(effect, position, Quaternion.identity);
-		//Debug.Log ("Seek Collided");
 	}
 
-	void OnTriggerEnter(Collider other){
-		//Debug.Log ("Hi");
-		if(changedTargets) return;
-		if(other.gameObject.tag == "Decoy"){
-			DecoyMissile decoy = other.gameObject.GetComponent<DecoyMissile>();
-			decoy.follow_count += 1;
-			target = decoy;
-		}
-	}
-	
+
 	void Update () {
 		if(target.vehicleGameObject != null){
 			//Access steering forces library and adjust it.
@@ -54,7 +39,6 @@ public class SimpleSeeking : MonoBehaviour, IVehicle {
 			Vector3 acceleration = steeringForce/mass;
 			velocity = Vector3.ClampMagnitude(velocity + acceleration, maxSpeed);
 		}
-
 		//make this fps independent
 		transform.position = transform.position + velocity * Time.deltaTime;
 		position = transform.position; //update for use in steering functions
